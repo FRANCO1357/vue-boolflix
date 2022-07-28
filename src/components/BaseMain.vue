@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-for="movie in movies" :key="movie.id">
+            <li v-for="movie in moviesArray" :key="movie.id">
             {{movie.title}} - 
             {{movie.original_title}} - 
             <div v-if="movie.original_language === 'it' || movie.original_language === 'en'">
@@ -14,7 +14,7 @@
             </li>
         </ul>
         <ul>
-            <li v-for="serie in series" :key="serie.id">
+            <li v-for="serie in seriesArray" :key="serie.id">
             {{serie.name}} - 
             {{serie.original_name}} - 
             <div v-if="serie.original_language === 'it' || serie.original_language === 'en'">
@@ -31,7 +31,11 @@
 
 <script>
 export default{
-    name: 'BaseMain'
+    name: 'BaseMain',
+    props:{
+        moviesArray: Array,
+        seriesArray: Array,
+    }
 }
 </script>
 
