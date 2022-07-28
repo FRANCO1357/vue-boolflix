@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="searchText" @keyup.enter="displayResult">
+    <BaseHeader @search-text="displayResult"/>
     <ul>
       <li v-for="movie in movies" :key="movie.id">
       {{movie.title}} - 
@@ -32,6 +32,7 @@
 
 <script>
 import axios from 'axios'
+import BaseHeader from './components/BaseHeader.vue';
 
 export default {
   name: 'App',
@@ -44,8 +45,8 @@ export default {
     }
   },
   components: {
-    
-  },
+    BaseHeader,
+},
   methods: {
     getMovies(){
       axios .get(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.searchText}`).then((res) =>{
@@ -59,10 +60,11 @@ export default {
       this.series = res.data.results;
     })    
     },
-    displayResult(){
+    displayResult(value){
+      this.searchText = value;
       this.getMovies();
       this.getSeries();
-    }
+    },
   }
 }
 
