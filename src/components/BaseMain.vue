@@ -23,7 +23,8 @@
             <ul v-for="serie in seriesArray" :key="serie.id">
                 <li>{{serie.name}}</li>
                 <li>{{serie.original_name}}</li>
-                <li><img :src="baseUrl + serie.poster_path" :alt="serie.name"></li>
+                <li v-if="serie.poster_path"><img :src="baseUrl + serie.poster_path" :alt="serie.name"></li>
+                <li v-else><img :src="cover"></li>
                 <li>
                     <div v-if="serie.original_language === 'it' || serie.original_language === 'en'">
                         <img :src="require(`../assets/flags/${serie.original_language}.png`)" alt="">
