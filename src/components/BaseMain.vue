@@ -5,8 +5,8 @@
             <ul v-for="movie in moviesArray" :key="movie.id">
                 <li>{{movie.title}}</li>
                 <li>{{movie.original_title}}</li>
-                <li><img :src="baseUrl + movie.poster_path" :alt="movie.title"></li>
-                <li><img :src="cover"></li>
+                <li v-if="movie.poster_path"><img :src="baseUrl + movie.poster_path" :alt="movie.title"></li>
+                <li v-else><img :src="cover"></li>
                 <li>
                     <div v-if="movie.original_language === 'it' || movie.original_language === 'en'">
                         <img :src="require(`../assets/flags/${movie.original_language}.png`)" alt="">
@@ -44,6 +44,7 @@ export default{
     data(){
         return{
             baseUrl: 'https://image.tmdb.org/t/p/w342',
+            cover: "https://previews.123rf.com/images/pxlprostudio/pxlprostudio1907/pxlprostudio190701502/127513726-icona-relativa-alla-striscia-di-pellicola-sullo-sfondo-per-la-progettazione-grafica-e-web-illustrazi.jpg?fj=1",
         }
     },
     props:{
@@ -59,12 +60,6 @@ export default{
             }
         },
     },
-    computed:{
-        cover(){
-            if(!this.movie.poster_path) return "https://www.altavod.com/content/rad";
-            return this.baseUlr + this.movie.poster_path
-        }
-    }
 }
 </script>
 
