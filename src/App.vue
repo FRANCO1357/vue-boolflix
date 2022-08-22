@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseHeader @search-text="displayResult"/>
+    <BaseHeader @search-text="fatchData"/>
     <BaseMain :movies-array="movies" :series-array="series"/>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   components: {
     BaseHeader,
     BaseMain
-},
+  },
   methods: {
     getMovies(){
       axios .get(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.searchText}`).then((res) =>{
@@ -37,7 +37,7 @@ export default {
       this.series = res.data.results;
     })    
     },
-    displayResult(value){
+    fatchData(value){
       this.searchText = value;
       this.getMovies();
       this.getSeries();
@@ -49,5 +49,28 @@ export default {
 </script>
 
 <style lang="scss">
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: sans-serif;
+}
+img{
+  max-width: 100%;
+}
+
+ul{
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  li{
+    list-style-type: none;
+    background-color: red;
+  }
+}
 
 </style>
