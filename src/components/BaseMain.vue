@@ -33,7 +33,7 @@
                         {{serie.original_language}}
                     </div>
                 </li>
-                <li>{{fiveStarVote(serie.vote_average)}}</li>
+                <li><i v-for="n in 5" :key="n" class="fa-star" :class="fiveStarVote(serie.vote_average, n)"></i></li>
             </ul>
         </div>
     </main>
