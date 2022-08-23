@@ -9,13 +9,13 @@
                 <li v-else><img :src="cover"></li>
                 <li>
                     <div v-if="movie.original_language === 'it' || movie.original_language === 'en'">
-                        <img :src="require(`../assets/flags/${movie.original_language}.png`)" alt="">
+                        <img :src="getMoviesLang(movie)" alt="">
                     </div>
                     <div v-else>
                         {{movie.original_language}}
                     </div>
                 </li>
-                <li>{{fiveStarVote(movie.vote_average)}}</li>
+                <li><i v-for="n in 5" :key="n" class="fa-star" :class="fiveStarVote(movie.vote_average, n)"></i></li>
             </ul>
         </div>
         <div id="series-section">
@@ -27,7 +27,7 @@
                 <li v-else><img :src="cover"></li>
                 <li>
                     <div v-if="serie.original_language === 'it' || serie.original_language === 'en'">
-                        <img :src="require(`../assets/flags/${serie.original_language}.png`)" alt="">
+                        <img :src="getMoviesLang(serie)" alt="">
                     </div>
                     <div v-else>
                         {{serie.original_language}}
@@ -53,13 +53,24 @@ export default{
         seriesArray: Array,
     },
     methods:{
-        fiveStarVote(vote) {
+        fiveStarVote(vote, n) {
             if (vote > 1){
-                return Math.ceil(vote / 2);
+                vote = Math.ceil(vote / 2);
+                if(vote >= n){
+                    return 'fa-solid'
+                } else{
+                    return 'fa-regular'
+                }
             } else{
-                return '';
+                return 'fa-regular';
             }
         },
+        getMoviesLang(movie){
+            return require(`../assets/flags/${movie.original_language}.png`)
+        },
+        getSeriesLang(serie){
+            return require(`../assets/flags/${serie.original_language}.png`)
+        }
     },
 }
 </script>
